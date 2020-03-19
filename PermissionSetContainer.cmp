@@ -1,0 +1,19 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader">
+    <aura:html tag="style">
+        .slds-modal__container{
+        height : auto;
+        width: 90%;
+        max-height: 95%;
+        max-width: 70rem;
+        }
+        .modal-body{
+        height : 650px !important;
+        max-height: 650px !important;
+        } 
+ 
+        .customFooter{
+        display: inline !important;
+        }
+    </aura:html>
+    <c:permissionSetComponent></c:permissionSetComponent>
+</aura:component>	
