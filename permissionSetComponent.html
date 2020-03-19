@@ -1,0 +1,102 @@
+<template>
+    <template if:true={displaySpinner}>
+        <lightning-spinner alternative-text="Loading" size="large" class="slds-spinner_brand"></lightning-spinner>
+    </template>
+    <div>
+        <div style="width: 50%; float:left;">
+            <div style="padding: 5px;">
+                <lightning-combobox class="around-small" label="Object" value={selectedObject}
+                options={objects} onchange={handleObjectChange}></lightning-combobox>
+            </div>   
+            <template if:true={fieldsData}>
+                <div style = "overflow-y: scroll; height: 400px;"> 
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate">
+                                        <div class="slds-truncate" title="Action">Action</div>
+                                    </div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Field">Field</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={fieldsData} for:item="f">
+                                <tr key={f.value}>
+                                    <th scope="col">
+                                        <div>
+                                            <lightning-input type="checkbox" value={f.value} data-id="2"></lightning-input>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div>{f.label}</div>
+                                    </th>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>       
+            </template>
+        </div> 
+        <div style="width: 50%; float:right">
+            <div class="modal-header slds-modal__header slds-size_1-of-1">
+                <h4 class="title slds-text-heading--medium">Permission Sets</h4>
+            </div>
+            <div style="height:190px; overflow-y: scroll;">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate">
+                                    <div class="slds-truncate" title="Action">Action</div>
+                                </div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Permission Set">Permission Set</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={PermissionSetData} for:item="f">
+                            <tr key={f.value}>
+                                <th scope="col">
+                                    <div>
+                                        <lightning-input type="checkbox" value={f.value} data-id="1"></lightning-input>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div>{f.label}</div>
+                                </th>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+            <div style="height:160px;">  
+                <div style="width: 50%; float:left; padding:10px;">
+                    <lightning-checkbox-group name="Checkbox Group"
+                                      label="Object Permission"
+                                      options={columnsForObject}
+                                      value={selectedObjectPermission}
+                                      onchange={handleObjectPermissionChange}>
+                    </lightning-checkbox-group>
+                </div>   
+                <div style="width: 50%; float:right; padding:10px;">
+                    <lightning-radio-group name="radioGroup"
+                                  label="Field Permission"
+                                  options={columns}
+                                  value={selectedPermission}
+                                  type="radio"
+                                  onchange={handleColumnChange}>
+                    </lightning-radio-group>
+                </div>
+            </div>
+            <div style="float: right; padding:10px;">       
+                <lightning-button variant="brand" label="Assign Permissions" onclick={handleClick}></lightning-button>
+            </div>
+        </div>
+    </div>
+</template>
